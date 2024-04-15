@@ -9,8 +9,7 @@ import classnames from 'classnames';
 import { type ReactElement, useState } from 'react';
 
 import { DarkModeToggle } from './DarkModeToggle';
-import styles from './HeaderNav.module.scss';
-import siteHeaderStyles from './SiteHeader.module.scss';
+import styles from './SiteHeader.module.scss';
 
 /**
  * Title of api header menu
@@ -58,12 +57,12 @@ const HeaderLinks = ({
     const framework = useFrameworkFromStore();
 
     return (
-        <ul className={classnames(siteHeaderStyles.navItemList, 'list-style-none')}>
+        <ul className={classnames(styles.navItemList, 'list-style-none')}>
             {items.map(({ title, path, url, icon }) => {
-                const linkClasses = classnames(siteHeaderStyles.navItem, {
-                    [siteHeaderStyles.navItemActive]: getIsActiveNav({ title, path: currentPath, allPaths, apiPaths }),
-                    [siteHeaderStyles.buttonItem]: title === 'Github',
-                    [siteHeaderStyles.githubItem]: title === 'Github',
+                const linkClasses = classnames(styles.navItem, {
+                    [styles.navItemActive]: getIsActiveNav({ title, path: currentPath, allPaths, apiPaths }),
+                    [styles.buttonItem]: title === 'Github',
+                    [styles.githubItem]: title === 'Github',
                 });
                 const href = path
                     ? urlWithPrefix({
@@ -75,7 +74,7 @@ const HeaderLinks = ({
                 return (
                     <li key={title.toLocaleLowerCase()} className={linkClasses}>
                         <a
-                            className={siteHeaderStyles.navLink}
+                            className={styles.navLink}
                             href={href}
                             onClick={() => {
                                 if (isOpen) {
@@ -100,14 +99,14 @@ const HeaderLinks = ({
 
 const HeaderExpandButton = ({ isOpen, toggleIsOpen }: { isOpen: boolean; toggleIsOpen: () => void }) => (
     <button
-        className={siteHeaderStyles.mobileMenuButton}
+        className={styles.mobileMenuButton}
         type="button"
         aria-controls={styles.mainNavSmall}
         aria-expanded={isOpen}
         aria-label="Toggle navigation"
         onClick={() => toggleIsOpen()}
     >
-        <MenuIcon className={siteHeaderStyles.menuIcon} />
+        <MenuIcon className={styles.menuIcon} />
     </button>
 );
 
@@ -125,7 +124,7 @@ const HeaderNavLarge = ({
     children: ReactElement;
 }) => {
     return (
-        <div className={classnames(siteHeaderStyles.mainNav, styles.mainNavLargeContainer)}>
+        <div className={classnames(styles.mainNav, styles.mainNavLargeContainer)}>
             <nav className={styles.mainNavLarge}>
                 <HeaderLinks currentPath={currentPath} items={items} allPaths={allPaths} apiPaths={apiPaths}>
                     {children}
@@ -156,7 +155,7 @@ const HeaderNavSmall = ({
         <>
             <HeaderExpandButton isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
             <Collapsible id={styles.mainNavSmall} isOpen={isOpen}>
-                <nav className={siteHeaderStyles.mainNav}>
+                <nav className={styles.mainNav}>
                     <HeaderLinks
                         currentPath={currentPath}
                         items={items}
