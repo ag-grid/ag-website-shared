@@ -2,11 +2,12 @@
  * Automated Row Grouping demo
  */
 import { Easing, Group } from '@tweenjs/tween.js';
+import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 
 import type { ColDef, GridApi, GridOptions, MenuItemDef } from 'ag-grid-community';
 import { ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
 import {
-    GridChartsModule,
+    IntegratedChartsModule,
     MenuModule,
     RangeSelectionModule,
     RowGroupingModule,
@@ -37,7 +38,7 @@ ModuleRegistry.registerModules([
     RowGroupingModule,
     RangeSelectionModule,
     MenuModule,
-    GridChartsModule,
+    IntegratedChartsModule.with(AgChartsEnterpriseModule),
     SideBarModule,
 ]);
 
