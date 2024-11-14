@@ -5,11 +5,11 @@ import { Easing, Group } from '@tweenjs/tween.js';
 import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 
 import type { ColDef, GridApi, GridOptions, MenuItemDef } from 'ag-grid-community';
-import { ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
 import {
+    CellSelectionModule,
     IntegratedChartsModule,
     MenuModule,
-    RangeSelectionModule,
     RowGroupingModule,
     SideBarModule,
 } from 'ag-grid-enterprise';
@@ -34,9 +34,10 @@ let scriptRunner: ScriptRunner;
 let restartScriptTimeout;
 
 ModuleRegistry.registerModules([
+    AllCommunityModule,
     ClientSideRowModelModule,
     RowGroupingModule,
-    RangeSelectionModule,
+    CellSelectionModule,
     MenuModule,
     IntegratedChartsModule.with(AgChartsEnterpriseModule),
     SideBarModule,

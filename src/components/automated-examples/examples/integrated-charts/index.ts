@@ -3,7 +3,7 @@
  */
 import { AgChartsEnterpriseModule } from 'ag-charts-enterprise';
 
-import { ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
+import { AllCommunityModule, ClientSideRowModelModule, ModuleRegistry, createGrid } from 'ag-grid-community';
 import {
     ClipboardModule,
     IntegratedChartsModule,
@@ -17,6 +17,7 @@ import type { CreateAutomatedIntegratedChartsParams } from './createAutomatedInt
 import { createAutomatedIntegratedChartsWithCreateGrid } from './createAutomatedIntegratedChartsWithCreateGrid';
 
 ModuleRegistry.registerModules([
+    AllCommunityModule,
     ClientSideRowModelModule,
     ClipboardModule,
     IntegratedChartsModule.with(AgChartsEnterpriseModule),
