@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import type { FunctionComponent } from 'react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './LandingPageAnimatedHeader.module.scss';
 
