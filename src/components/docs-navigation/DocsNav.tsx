@@ -8,7 +8,7 @@ import { Fragment, useEffect, useState } from 'react';
 
 import styles from './DocsNav.module.scss';
 
-function getOpenGroup({ menuData, pageName }: { menuData?: any; pageName: string }) {
+function getOpenGroup({ menuData, pageName }: { menuData?: any; pageName?: string }) {
     if (pageName === undefined) {
         return;
     }
@@ -43,7 +43,7 @@ function getLinkUrl({ framework, path, url }: { framework: Framework; path?: str
     return url ? url : getExamplePageUrl({ framework, path: path! });
 }
 
-function Item({ itemData, framework, pageName }: { itemData?: any; framework: Framework; pageName: string }) {
+function Item({ itemData, framework, pageName }: { itemData?: any; framework: Framework; pageName?: string }) {
     const linkUrl = itemData.path ? getLinkUrl({ framework, path: itemData.path }) : itemData.url;
     const isExternalURL = itemData.url;
     const isCorrectFramework = !itemData.frameworks
@@ -96,7 +96,7 @@ function Group({
 }: {
     groupData?: any;
     framework: Framework;
-    pageName: string;
+    pageName?: string;
     openGroup?: any;
     setOpenGroup?: any;
 }) {
@@ -146,7 +146,7 @@ function Section({
 }: {
     sectionData?: any;
     framework: Framework;
-    pageName: string;
+    pageName?: string;
     openGroup?: any;
     setOpenGroup?: any;
 }) {
@@ -184,7 +184,7 @@ export function DocsNav({
 }: {
     menuData?: any;
     framework: Framework;
-    pageName: string;
+    pageName?: string;
     showWhatsNew?: boolean;
 }) {
     const pageOpenGroup = getOpenGroup({ menuData, pageName });
