@@ -9,6 +9,10 @@ import { Fragment, useEffect, useState } from 'react';
 import styles from './DocsNav.module.scss';
 
 function getOpenGroup({ menuData, pageName }: { menuData?: any; pageName: string }) {
+    if (pageName === undefined) {
+        return;
+    }
+
     let openGroup = undefined;
 
     function childrenHasPage({ group, children, pageName }) {
