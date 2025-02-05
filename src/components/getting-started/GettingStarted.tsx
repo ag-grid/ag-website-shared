@@ -11,9 +11,9 @@ const GettingStarted: FunctionComponent = () => {
     const features = [
         {
             icon: 'concepts',
-            title: 'Key Concepts',
+            title: 'Key Features',
             description: 'Browse our commonly used features',
-            link: './quick-reference/',
+            link: './key-features/',
         },
         {
             icon: 'tutorials',
