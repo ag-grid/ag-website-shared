@@ -1,4 +1,3 @@
-import AlarmIcon from '@ag-website-shared/images/inline-svgs/alarm.svg?react';
 import BoldChevronDown from '@ag-website-shared/images/inline-svgs/bold-chevron-down.svg?react';
 import BoldChevronLeft from '@ag-website-shared/images/inline-svgs/bold-chevron-left.svg?react';
 import BoldChevronRight from '@ag-website-shared/images/inline-svgs/bold-chevron-right.svg?react';
