@@ -1,8 +1,7 @@
+import { urlWithBaseUrl } from '@utils/urlWithBaseUrl';
 import classnames from 'classnames';
 import type { FunctionComponent } from 'react';
 import { useEffect, useState } from 'react';
-
-import { urlWithBaseUrl } from '@utils/urlWithBaseUrl';
 
 import styles from './FrameworkTextAnimation.module.scss';
 
@@ -40,17 +39,15 @@ export const FrameworkTextAnimation: FunctionComponent<Props> = ({ prefix, suffi
 
     const renderLogo = (word: string) =>
         showLogos ? (
-            <img
-                src={urlWithBaseUrl(`/${LOGO_PATH}${word.toLowerCase()}.svg`)}
-                alt=""
-                className={styles.logo}
-            />
+            <img src={urlWithBaseUrl(`/${LOGO_PATH}${word.toLowerCase()}.svg`)} alt="" className={styles.logo} />
         ) : null;
 
     return (
         <span className={classnames(styles.animatedWordsOuter, className)}>
             <span className={styles.spacer} aria-hidden="true">
-                {showLogos && <img src={urlWithBaseUrl(`/${LOGO_PATH}javascript.svg`)} alt="" className={styles.logo} />}
+                {showLogos && (
+                    <img src={urlWithBaseUrl(`/${LOGO_PATH}javascript.svg`)} alt="" className={styles.logo} />
+                )}
                 {`${p}${WORDS[0]}${s}`}
             </span>
             {WORDS.map((word, i) => (
