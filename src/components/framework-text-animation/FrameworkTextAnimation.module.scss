@@ -1,36 +1,84 @@
 @use 'design-system' as *;
 
-.animatedWordsOuter {
-    --word-height: 1.3em;
-    --word-index: 0;
-
-    position: relative;
-    display: inline-flex;
-    align-items: flex-end;
-    height: var(--word-height);
-    margin-bottom: -0.2em;
-    text-align: left;
-    overflow: hidden;
-}
-
-.animatedWordsInner {
-    display: inline-flex;
-    flex-direction: column;
-    transform: translateY(calc(var(--word-height) * var(--word-index) * 1.5));
-    transition: transform 0.25s cubic-bezier(0.6, 0.3, 0.5, 1.4);
-
-    > span {
-        height: calc(var(--word-height) * 1.5);
-        padding-top: calc(var(--word-height) * 0.5);
+@keyframes blurEnter {
+    from {
+        opacity: 0;
+        filter: blur(8px);
+        transform: translateY(0.4em);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
     }
 }
 
+@keyframes blurExit {
+    from {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        filter: blur(8px);
+        transform: translateY(-0.4em);
+    }
+}
+
+.animatedWordsOuter {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.spacer {
+    visibility: hidden;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+
+.logo {
+    height: $spacing-size-6;
+    width: $spacing-size-6;
+    margin-right: 0.25em;
+    flex-shrink: 0;
+    border-radius: 14%;
+
+    @media screen and (min-width: $breakpoint-fw-selector-full-width-large) {
+        height: $spacing-size-10;
+        width: $spacing-size-10;
+    }
+}
+
+.word {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(0.4em);
+}
+
+.active {
+    animation: blurEnter 0.25s ease 0.25s forwards;
+}
+
+.leaving {
+    animation: blurExit 0.25s ease forwards;
+}
+
 .javascript {
-    color: #f7df1e; // Yellow
+    color: #f7df1e;
 }
 
 .react {
-    color: #61dafb; // Light Blue
+    color: #61dafb;
 }
 
 .angular {
@@ -41,5 +89,5 @@
 }
 
 .vue {
-    color: #42b883; // Green
+    color: #42b883;
 }

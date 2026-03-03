@@ -2,44 +2,69 @@ import classnames from 'classnames';
 import type { FunctionComponent } from 'react';
 import { useEffect, useState } from 'react';
 
+import { urlWithBaseUrl } from '@utils/urlWithBaseUrl';
+
 import styles from './FrameworkTextAnimation.module.scss';
+
+const WORDS = ['JavaScript', 'Vue', 'Angular', 'React'] as const;
+const LOGO_PATH = 'images/fw-logos/';
 
 interface Props {
     prefix?: string;
     suffix?: string;
+    className?: string;
+    showLogos?: boolean;
 }
 
-export const FrameworkTextAnimation: FunctionComponent<Props> = ({ prefix, suffix }) => {
-    const [wordIndex, setWordIndex] = useState(0);
-    const [noTransitions, setNoTransitions] = useState(false);
+export const FrameworkTextAnimation: FunctionComponent<Props> = ({ prefix, suffix, className, showLogos }) => {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [leavingIndex, setLeavingIndex] = useState(-1);
 
-    prefix = prefix ? `${prefix} ` : '';
-    suffix = suffix ? ` ${suffix}` : '';
+    const p = prefix ? `${prefix} ` : '';
+    const s = suffix ? ` ${suffix}` : '';
 
     useEffect(() => {
-        const delayMs = wordIndex === 0 ? 50 : 2500;
-
         const timeout = setTimeout(() => {
-            const nextWordIndex = (wordIndex + 1) % 5;
-            setNoTransitions(nextWordIndex === 0);
-            setWordIndex(nextWordIndex);
-        }, delayMs);
+            setLeavingIndex(activeIndex);
+            setActiveIndex((prev) => (prev + 1) % WORDS.length);
+        }, 2500);
 
         return () => clearTimeout(timeout);
-    }, [wordIndex]);
+    }, [activeIndex]);
+
+    useEffect(() => {
+        if (leavingIndex < 0) return;
+        const timeout = setTimeout(() => setLeavingIndex(-1), 600);
+        return () => clearTimeout(timeout);
+    }, [leavingIndex]);
+
+    const renderLogo = (word: string) =>
+        showLogos ? (
+            <img
+                src={urlWithBaseUrl(`/${LOGO_PATH}${word.toLowerCase()}.svg`)}
+                alt=""
+                className={styles.logo}
+            />
+        ) : null;
 
     return (
-        <span
-            className={classnames(styles.animatedWordsOuter, { 'no-transitions': noTransitions })}
-            style={{ '--word-index': wordIndex }}
-        >
-            <span className={styles.animatedWordsInner}>
-                <span className={styles.javascript}>{`${prefix}JavaScript${suffix}`}</span>
-                <span className={styles.vue}>{`${prefix}Vue${suffix}`}</span>
-                <span className={styles.angular}>{`${prefix}Angular${suffix}`}</span>
-                <span className={styles.react}>{`${prefix}React${suffix}`}</span>
-                <span className={styles.javascript}>{`${prefix}JavaScript${suffix}`}</span>
+        <span className={classnames(styles.animatedWordsOuter, className)}>
+            <span className={styles.spacer} aria-hidden="true">
+                {showLogos && <img src={urlWithBaseUrl(`/${LOGO_PATH}javascript.svg`)} alt="" className={styles.logo} />}
+                {`${p}${WORDS[0]}${s}`}
             </span>
+            {WORDS.map((word, i) => (
+                <span
+                    key={word}
+                    className={classnames(styles.word, styles[word.toLowerCase()], {
+                        [styles.active]: i === activeIndex,
+                        [styles.leaving]: i === leavingIndex,
+                    })}
+                >
+                    {renderLogo(word)}
+                    {`${p}${word}${s}`}
+                </span>
+            ))}
         </span>
     );
 };
