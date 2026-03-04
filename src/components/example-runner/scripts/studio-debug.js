@@ -85,9 +85,9 @@ function getDataJs(options) {
 /**
  * @param {any} chartWidget
  */
-function exportToPlunker(chartWidget) {
+function exportToPlunker({ widget }) {
     /** @type {AgChartOptions} */
-    const options = chartWidget.getOptions();
+    const options = widget.getOptions();
 
     const form = document.createElement('form');
     form.method = 'post';
@@ -124,6 +124,13 @@ const exportToPlunkerToolbarButton = {
     action: exportToPlunker,
 };
 
+const logStateButton = {
+    type: 'button',
+    text: 'Log State',
+    icon: 'eye',
+    action: ({ api }) => console.log(api.getState()),
+};
+
 /** @type {any} */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const debugOverrides = {
@@ -135,6 +142,12 @@ const debugOverrides = {
         for (const [widgetId, widgetConfig] of Object.entries(widgetConfigs)) {
             if (widgetId.includes('chart') && !widgetConfig.toolbar.includes(exportToPlunkerToolbarButton)) {
                 widgetConfig.toolbar.push(exportToPlunkerToolbarButton);
+            }
+            if (!widgetConfig.toolbar?.includes(logStateButton)) {
+                if (widgetConfig.toolbar == null) {
+                    widgetConfig.toolbar = [];
+                }
+                widgetConfig.toolbar.push(logStateButton);
             }
         }
         return widgetConfigs;
