@@ -69,7 +69,6 @@ export const ContactForm: FunctionComponent<Props> = ({
     const [returnUrl, setReturnUrl] = useState(RETURN_URLS.success);
     const [isDisabled, setIsDisabled] = useState(false);
     const [captchaError, setCaptchaError] = useState(false);
-    const [trialRequested, setTrialRequested] = useState(false);
 
     const {
         register,
@@ -81,11 +80,6 @@ export const ContactForm: FunctionComponent<Props> = ({
 
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
-
-        if (searchParams.get('trial') === 'true') {
-            setTrialRequested(true);
-        }
-
         const hasDebugFlag = searchParams.has('debug');
         if (hasDebugFlag) {
             const isDebugFlag = searchParams.get('debug') === 'true';
@@ -218,22 +212,6 @@ export const ContactForm: FunctionComponent<Props> = ({
                     </div>
                 </div>
             )}
-
-            <label className={styles.trialCheckbox}>
-                <input
-                    type="checkbox"
-                    name="trial_license"
-                    value="yes"
-                    checked={trialRequested}
-                    onChange={(e) => setTrialRequested(e.target.checked)}
-                />
-                <span className={styles.trialCheckboxText}>
-                    <span>Request a 45-day trial licence</span>
-                    <span className={styles.trialCheckboxSubtitle}>
-                        Explore all enterprise features with no restrictions or watermarks.
-                    </span>
-                </span>
-            </label>
 
             <div className={classnames('input-field', { 'input-error': captchaError })}>
                 <div className="g-recaptcha" data-sitekey={RECAPTCHA_SITE_KEY} />
