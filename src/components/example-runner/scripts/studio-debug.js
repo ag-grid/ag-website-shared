@@ -1,7 +1,7 @@
 // @ts-check
 /** @typedef {import('ag-charts-enterprise').AgChartOptions} AgChartOptions */
 
-const html = String.raw;
+const html = String;
 
 const indexHtml = html`<!doctype html>
     <html lang="en">
