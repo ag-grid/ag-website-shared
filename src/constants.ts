@@ -5,7 +5,7 @@ export const MIGRATION_DOCUMENTATION_NAV_DATA = {
     text: 'Documentation',
 };
 
-export const RECAPTCHA_SITE_KEY = '6Lfbjo0sAAAAAMqHWBwiEE2oj6loJSdwLlTxvUt8';
+export const RECAPTCHA_SITE_KEY = '6Ld_ro4sAAAAACjXUk0goeMBFJvD630upERER7pr';
 export const RECAPTCHA_URL = 'https://www.google.com/recaptcha/api.js';
 export const CONTACT_FORM_DATA = {
     default: {
