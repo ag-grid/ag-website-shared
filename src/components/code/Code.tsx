@@ -31,6 +31,7 @@ const GrammarMap = {
     diff: Prism.languages.diff,
     scss: Prism.languages.scss,
     xml: Prism.languages.xml,
+    plain: Prism.languages.plain,
 };
 
 export type Language = keyof typeof GrammarMap;
