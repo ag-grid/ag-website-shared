@@ -2,10 +2,7 @@
 
 .customMenu {
     display: none;
-    position: relative;
     padding-right: $spacing-size-2;
-    padding-bottom: 8px;
-    margin-bottom: -8px;
     margin-right: auto;
     user-select: none;
 
@@ -15,6 +12,10 @@
 
     @media screen and (max-width: 1180px) {
         display: none;
+    }
+
+    @media screen and (min-width: $breakpoint-hero-small) {
+        position: relative;
     }
 }
 
@@ -106,25 +107,19 @@
     opacity: 0;
     z-index: 2;
     transform: translateY(10px) scale(0.95);
-    pointer-events: none;
-    visibility: hidden;
     transition:
         opacity 0.15s ease,
-        transform 0.15s ease,
-        visibility 0s 0.15s;
+        transform 0.15s ease;
 
     #{$selector-darkmode}:has([data-is-homepage='false']) &,
     #{$selector-darkmode}:has([data-is-homepage='true'] :global(.header-scrolled)) & {
         background: color-mix(in srgb, var(--color-bg-primary), var(--color-fg-white) 5%);
     }
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: -16px;
+    @media screen and (min-width: $breakpoint-hero-small) {
+        top: 100%;
         left: 0;
-        right: 0;
-        height: 16px;
+        width: 380px;
     }
 }
 
@@ -132,12 +127,6 @@
     animation: fadeInUp 0.15s ease-in-out;
     opacity: 1;
     transform: translateY(0) scale(1);
-    pointer-events: auto;
-    visibility: visible;
-    transition:
-        opacity 0.15s ease,
-        transform 0.15s ease,
-        visibility 0s 0s;
 }
 
 .productTitle {
