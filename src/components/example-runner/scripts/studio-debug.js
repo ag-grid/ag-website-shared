@@ -153,3 +153,51 @@ const debugOverrides = {
         return widgetConfigs;
     },
 };
+
+// Propagate URL query params into window globals consumed by ag-studio.
+// Runs before the example's main.js to ensure flags are visible at startup.
+// Values are *appended* to any existing window.agStudioDebug / agStudioOpts.
+//   ?explain=<options>       → adds 'query:explain' to window.agStudioDebug, 'options' can include 'rows' and 'plain' to add 'query:explain:rows' and set window.agStudioOpts.explainFormat = 'plain', respectively
+//   ?batchLog=true      → adds 'query:batch' to window.agStudioDebug
+//   ?sf=<number>        → sets window.agStudioOpts.scaleFactor (consumed by demoDataGenerator), 1.0 = ~4.5mil rows
+//   ?batching=false     → sets window.agStudioOpts.queryBatching = false
+(function () {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const agStudioOpts = { ...(window.agStudioOpts ?? {}) };
+    const agStudioDebug = Array.isArray(window.agStudioDebug) ? window.agStudioDebug.slice() : [];
+
+    const explainParam = urlParams.get('explain');
+    if (explainParam && !agStudioDebug.includes('query:explain')) {
+        agStudioDebug.push('query:explain');
+        if (explainParam.includes('rows')) {
+            agStudioDebug.push('query:explain:rows');
+        }
+        if (explainParam.includes('plain')) {
+            agStudioOpts.explainFormat = 'plain';
+        }
+    }
+    if (urlParams.get('batchLog') === 'true' && !agStudioDebug.includes('query:batch')) {
+        agStudioDebug.push('query:batch');
+    }
+    if (urlParams.get('tracing') === 'true') {
+        agStudioDebug.push('traceMarkers');
+    }
+
+    if (agStudioDebug.length > 0) {
+        window.agStudioDebug = agStudioDebug;
+    }
+
+    const sfParam = urlParams.get('sf');
+    if (sfParam != null) {
+        const sf = parseFloat(sfParam);
+        if (Number.isFinite(sf) && sf > 0) {
+            agStudioOpts.scaleFactor = sf;
+        }
+    }
+    const batchingParam = urlParams.get('batching');
+    if (batchingParam != null) {
+        agStudioOpts.queryBatching = batchingParam !== 'false';
+    }
+    window.agStudioOpts = agStudioOpts;
+})();
