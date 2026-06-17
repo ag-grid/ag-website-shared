@@ -137,6 +137,35 @@ const logStateButton = {
     action: ({ api }) => console.log(api.getState()),
 };
 
+/**
+ * @param {any} api
+ * @returns {any}
+ */
+const internalApi = (api) => {
+    const internalsKey = Object.getOwnPropertySymbols(api)[0];
+    return (api)[internalsKey];
+}
+
+/** @type {AgWidgetToolbarItem} */
+const requeryWithExplainButton = {
+    id: 'requeryWithExplain',
+    type: 'button',
+    label: 'Requery with Explain',
+    icon: 'aiExecuteQuery',
+    action: (params) => {
+        const { api } = params;
+        const widgetId = /** @type {any} */ (params).widgetId;
+        const refresh = internalApi(api)?.refresh;
+        const win = /** @type {{agStudioOpts?: Record<string, unknown>}} */ (window);
+        const savedOpts = win.agStudioOpts;
+        win.agStudioOpts = { ...(savedOpts ?? {}), explain: { mode: 'analyze', samples: true, widgetId } };
+        refresh(widgetId);
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            win.agStudioOpts = savedOpts;
+        }));
+    },
+};
+
 /** @type {any} */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const debugOverrides = {
@@ -169,6 +198,10 @@ const debugOverrides = {
                 
                 if (!toolbar?.includes(logStateButton)) {
                     addButton(logStateButton);
+                }
+
+                if (!toolbar?.includes(requeryWithExplainButton)) {
+                    addButton(requeryWithExplainButton);
                 }
 
                 return { ...widget, toolbar };
