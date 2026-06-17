@@ -183,7 +183,9 @@ const debugOverrides = {
                  * @param {AgWidgetToolbarItem} button
                  */
                 const addButton = (button) => {
-                    toolbar ??= [];
+                    if (!toolbar) {
+                        toolbar = ['duplicate', 'delete'];
+                    }
                     const dupIndex = toolbar.findIndex((item) => item === 'duplicate');
                     if (dupIndex === -1) {
                         toolbar.push(button);
