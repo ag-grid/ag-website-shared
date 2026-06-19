@@ -175,8 +175,8 @@
     position: relative;
 
     & svg {
-        height: var(--text-fs-base);
-        width: var(--text-fs-base);
+        height: var(--text-fs-xs);
+        width: var(--text-fs-xs);
         transition: transform $transition-default-timing;
     }
 

@@ -1,6 +1,7 @@
 import ButtonGroup, { type ButtonType } from '@ag-website-shared/components/button-group/ButtonGroup';
 import { useFrameworkFromStore } from '@utils/hooks/useFrameworkFromStore';
 import React, { useState } from 'react';
+import classnames from 'classnames';
 
 import styles from './RoadmapBoard.module.scss';
 import { RoadmapCard } from './roadmap-card/RoadmapCard';
@@ -28,7 +29,11 @@ export const RoadmapBoard: React.FC<RoadmapBoardProps> = ({ roadmapData: { items
         {
             text: 'All',
             onClick: () => setFilter('all'),
-            className: styles.all,
+            className: classnames(styles.all, {
+                [styles.hasPlanned]: statusList.includes('planned'),
+                [styles.hasInprogress]: statusList.includes('in-progress'),
+                [styles.hasShipped]: statusList.includes('shipped'),
+            }),
             active: filter === 'all',
         },
         ...statusList.map((status) => ({
