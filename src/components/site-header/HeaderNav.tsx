@@ -30,7 +30,7 @@ const getIsActiveNav = ({
     allPaths: MenuItem[];
     apiPaths: string[];
 }): boolean => {
-    const allPathsMatch = allPaths.find((link) => path.includes(link.path!));
+    const allPathsMatch = allPaths.find((link) => link.path && path.startsWith(link.path));
     const currentNavItem = allPathsMatch?.title;
 
     const pageName = getPageNameFromPath(path);
