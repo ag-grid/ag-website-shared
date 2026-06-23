@@ -11,6 +11,18 @@
     }
 }
 
+@keyframes roadmap-show-scroll-indicator {
+    0% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .roadmapSection {
     padding: $spacing-size-8;
     max-width: 1200px;
@@ -22,21 +34,59 @@
 }
 
 .swimlanesContainer {
+    --scroll-gradient-width: 60px;
+
+    display: grid;
+    grid-template-columns: 0 1fr 0;
     border-radius: var(--radius-lg);
+    border: 1px solid var(--color-button-secondary-border);
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
 }
 
+
+ @supports (animation-timeline: scroll()) {
+    @media screen and (max-width: 1140px) {
+        .swimlanesContainer {
+            --scroll-gradient-width: 60px;
+
+            &::after {
+                content: '';
+                position: sticky;
+                z-index: 2;
+                width: var(--scroll-gradient-width);
+                height: 100%;
+                opacity: 0;
+                pointer-events: none;
+                animation: roadmap-show-scroll-indicator linear;
+                animation-timeline: scroll(nearest inline);
+            }
+
+            &::after {
+                grid-column: 3;
+                right: 0;
+                background-image: linear-gradient(to left, var(--color-bg-primary), transparent), 
+                    linear-gradient(to left, var(--color-bg-primary), transparent 50%);
+            }
+        }
+
+        .swimlanes {
+            margin-right: calc(var(--scroll-gradient-width) * -1);
+        }
+    }
+ }
+
 .swimlanes {
+    grid-column: 2;
     display: grid;
     min-width: 600px;
     grid-template-columns: repeat(4, 75vw);
 
     @media screen and (min-width: $breakpoint-docs-search-small) {
         min-width: unset;
-        grid-template-columns: repeat(4, minmax(280px, 1fr));
+        grid-template-columns: repeat(4, minmax(276px, 1fr));
     }
 }
 
@@ -47,7 +97,7 @@
     padding: $spacing-size-4;
     font-weight: var(--text-bold);
     font-size: var(--text-fs-md);
-    border-bottom: 1px solid color-mix(in srgb, transparent, #181d1f 15%);
+    border-bottom: 1px solid var(--color-button-secondary-border);
 
     #{$selector-darkmode} & {
         background-color: var(--color-gray-800);
@@ -66,16 +116,15 @@
 }
 
 .swimlane {
-    border: 1px solid color-mix(in srgb, transparent, #181d1f 15%);
     overflow: hidden;
-    scroll-snap-align: center;
+    scroll-snap-align: start;
 
     #{$selector-darkmode} & {
         border-color: var(--color-gray-700);
     }
 
-    & + & {
-        border-left: none;
+    &:not(:last-child) {
+        border-right: 1px solid var(--color-button-secondary-border);
     }
 
     &:first-child {
