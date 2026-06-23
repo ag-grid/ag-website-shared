@@ -48,21 +48,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
 
-.expandIcon {
-    width: var(--text-fs-xs);
-    height: var(--text-fs-xs);
-    transition: transform 0.2s ease-in-out;
-    fill: var(--color-gray-500);
-    transition: all 0.1s ease-in-out;
+    :global(.expand-icon) {
+        width: var(--text-fs-xs);
+        height: var(--text-fs-xs);
+        transition: transform 0.2s ease-in-out;
+        fill: var(--color-gray-500);
+        transition: all 0.1s ease-in-out;
 
-    #{$selector-darkmode} & {
-        fill: var(--color-gray-400);
-    }
+        #{$selector-darkmode} & {
+            fill: var(--color-gray-400);
+        }
 
-    &.expanded {
-        transform: rotate(-180deg);
+        &:global(.expanded) {
+            transform: rotate(-180deg);
+        }
     }
 }
 

@@ -42,9 +42,7 @@ export const RoadmapCard: React.FC<RoadmapCardProps> = ({ data: { id, title, des
                 {why && (
                     <Icon
                         name="chevronDown"
-                        svgClasses={classnames(styles.expandIcon, {
-                            [styles.expanded]: isExpanded,
-                        })}
+                        svgClasses={isExpanded ? "expand-icon expanded" : "expand-icon"}
                     />
                 )}
             </span>
