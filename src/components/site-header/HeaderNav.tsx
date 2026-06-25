@@ -4,9 +4,9 @@ import { Icon } from '@ag-website-shared/components/icon/Icon';
 import MenuIcon from '@ag-website-shared/images/inline-svgs/menu-icon.svg?react';
 import { resetScrollPosition } from '@ag-website-shared/utils/navScrollPosition';
 import { getPageNameFromPath } from '@components/docs/utils/urlPaths';
+import { LIBRARY } from '@constants';
 import { useFrameworkFromStore } from '@utils/hooks/useFrameworkFromStore';
 import { urlWithPrefix } from '@utils/urlWithPrefix';
-import { LIBRARY } from '@constants';
 import classnames from 'classnames';
 import GithubSlugger from 'github-slugger';
 import { useState } from 'react';
@@ -79,7 +79,7 @@ const HeaderLinks = ({
                 return (
                     <li key={title.toLocaleLowerCase()} className={linkClasses}>
                         <a
-                            id={`${slugger.slug(title)}-nav`}
+                            id={`${toggleIsOpen ? 'mobile-' : ''}${slugger.slug(title)}-nav`}
                             className={styles.navLink}
                             href={href}
                             onClick={() => {
