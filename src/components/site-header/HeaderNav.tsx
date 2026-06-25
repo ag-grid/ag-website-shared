@@ -6,6 +6,7 @@ import { resetScrollPosition } from '@ag-website-shared/utils/navScrollPosition'
 import { getPageNameFromPath } from '@components/docs/utils/urlPaths';
 import { useFrameworkFromStore } from '@utils/hooks/useFrameworkFromStore';
 import { urlWithPrefix } from '@utils/urlWithPrefix';
+import { LIBRARY } from '@constants';
 import classnames from 'classnames';
 import GithubSlugger from 'github-slugger';
 import { useState } from 'react';
@@ -58,6 +59,8 @@ const HeaderLinks = ({
     const framework = useFrameworkFromStore();
     const slugger = new GithubSlugger();
 
+    const productName = `AG ${LIBRARY.charAt(0).toUpperCase()}${LIBRARY.slice(1)}`;
+
     return (
         <ul className={classnames(styles.navItemList, 'list-style-none')}>
             {items.map(({ title, path, url, icon }) => {
@@ -87,7 +90,7 @@ const HeaderLinks = ({
                                 // Reset docs nav scroll position when using header nav
                                 resetScrollPosition();
                             }}
-                            aria-label={`AG Grid ${title}`}
+                            aria-label={`${productName} ${title}`}
                         >
                             {icon && <Icon name={icon} />}
                             <span>{title}</span>
