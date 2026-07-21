@@ -324,6 +324,9 @@ export const ContactForm: FunctionComponent<Props> = ({
                 type="submit"
                 value={submitLabel || 'Send us a message'}
             />
+            <p className={styles.privacyMessage}>
+                By submitting this form you agree to our <a href={PRIVACY_POLICY_URL}>Privacy Policy</a>.
+            </p>
             <p>
                 For technical support, visit our{' '}
                 <a
