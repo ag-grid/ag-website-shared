@@ -15,13 +15,33 @@ export type RenderedThemeInfo = {
     usedParts: PartModel[];
 };
 
+let baseTheme: Theme = themeQuartz;
+
+/**
+ * Hosts supply the base theme the preview renders from (e.g. Studio's
+ * studioTheme). Defaults to grid's themeQuartz.
+ */
+export const setBaseTheme = (theme: Theme) => {
+    baseTheme = theme;
+};
+
+let renderedFeatureNames: string[] = ['iconSet'];
+
+/**
+ * Hosts supply which swappable-part features feed into the rendered preview
+ * theme. Defaults to grid's ['iconSet']. Hosts without parts supply [].
+ */
+export const setRenderedFeatures = (featureNames: string[]) => {
+    renderedFeatureNames = featureNames;
+};
+
 const renderedThemeInfoAtom = atom((get): RenderedThemeInfo => {
     const enabledAdvancedParams = get(enabledAdvancedParamsAtom);
 
-    let theme = themeQuartz;
+    let theme = baseTheme;
 
     const usedParts: PartModel[] = [];
-    for (const featureName of ['iconSet']) {
+    for (const featureName of renderedFeatureNames) {
         const feature = FeatureModel.for(featureName);
         const partModel = get(feature.selectedPartAtom);
         if (partModel.part !== feature.defaultPart.part) {
