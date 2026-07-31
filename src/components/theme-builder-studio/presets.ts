@@ -1,5 +1,8 @@
+import type { FontFamilyValue } from '@ag-website-shared/theming/api';
 import type { Preset as SharedPreset } from '@ag-website-shared/theming/preset';
 import type { ThemeParams } from '@ag-website-shared/theming/utils';
+
+import { DM_SANS, FRAUNCES, IBM_PLEX_MONO, INTER, MERRIWEATHER, SPACE_GROTESK } from './fonts';
 
 // Studio keeps its own Preset shape (light/dark variants) rather than the shared
 // single-variant Preset, because its presets are authored per colour scheme. The
@@ -79,8 +82,9 @@ function paletteParams(themeKey: keyof typeof CHART_PALETTES, mode: Mode): Studi
 }
 
 // Set every font surface the studio renders so a preset's font reaches KPI
-// captions and chart labels alongside the grid itself.
-function sharedFonts(family: string, size: number, headerWeight: number | string): StudioParamMap {
+// captions and chart labels alongside the grid itself. `family` must come from
+// ./fonts.
+function sharedFonts(family: FontFamilyValue, size: number, headerWeight: number | string): StudioParamMap {
     return {
         fontFamily: family,
         fontSize: size,
@@ -104,35 +108,35 @@ function sharedFonts(family: string, size: number, headerWeight: number | string
 }
 
 const midnightShared: StudioParamMap = {
-    ...sharedFonts('Inter, sans-serif', 13, 600),
+    ...sharedFonts(INTER, 13, 600),
     spacing: 6,
     borderRadius: 4,
     borderWidth: 1,
 };
 
 const forestShared: StudioParamMap = {
-    ...sharedFonts('Merriweather, Georgia, serif', 13, 700),
+    ...sharedFonts(MERRIWEATHER, 13, 700),
     spacing: 8,
     borderRadius: 10,
     borderWidth: 1,
 };
 
 const slateShared: StudioParamMap = {
-    ...sharedFonts('DM Sans, sans-serif', 14, 500),
+    ...sharedFonts(DM_SANS, 14, 500),
     spacing: 8,
     borderRadius: 8,
     borderWidth: 0,
 };
 
 const arcticShared: StudioParamMap = {
-    ...sharedFonts('IBM Plex Mono, monospace', 12, 600),
+    ...sharedFonts(IBM_PLEX_MONO, 12, 600),
     spacing: 6,
     borderRadius: 2,
     borderWidth: 2,
 };
 
 const charcoalShared: StudioParamMap = {
-    ...sharedFonts('Space Grotesk, sans-serif', 14, 700),
+    ...sharedFonts(SPACE_GROTESK, 14, 700),
     spacing: 8,
     borderRadius: 12,
     borderWidth: 2,
@@ -140,7 +144,7 @@ const charcoalShared: StudioParamMap = {
 };
 
 const plumShared: StudioParamMap = {
-    ...sharedFonts('Fraunces, Georgia, serif', 13, 600),
+    ...sharedFonts(FRAUNCES, 13, 600),
     spacing: 8,
     borderRadius: 8,
     borderWidth: 1,
