@@ -183,7 +183,7 @@ export const PRESETS: StudioPreset[] = [
                     // best contrast (it is tuned against #FFFFFF). Widget fill stays
                     // the opaque backgroundColor default so grid total rows are solid.
                     studioCanvasBackgroundColor: '#FFFFFF',
-                    studioWidgetBorder: [2, '#0F4A85'],
+                    studioWidgetBorder: [1, '#0F4A85'],
                     // Panel section dividers default to ~8% foreground; lift them to
                     // the contrast border so they match the axes and widget outlines.
                     studioPanelSectionBorderColor: '#0F4A85',
@@ -219,7 +219,7 @@ export const PRESETS: StudioPreset[] = [
                     // Widget fill defaults to backgroundColor (#000000), which
                     // already equals the dark canvas - opaque, no surface step, so
                     // the contrast border alone separates widgets (see light).
-                    studioWidgetBorder: [2, '#6FC3DF'],
+                    studioWidgetBorder: [1, '#6FC3DF'],
                     studioPanelSectionBorderColor: '#6FC3DF',
                     headerBackgroundColor: '#000000',
                     headerTextColor: '#FFFFFF',

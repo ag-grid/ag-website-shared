@@ -2,7 +2,6 @@ import { PresetButton, PresetScroller } from '@ag-website-shared/components/them
 import { ResetChangesModal } from '@ag-website-shared/components/theme-builder/ResetChangesModal';
 import { getChangedModelItemCount } from '@ag-website-shared/theming/changed-model-items';
 import { applyPreset } from '@ag-website-shared/theming/preset';
-import styled from '@emotion/styled';
 import { useStore } from 'jotai';
 import { useState } from 'react';
 
@@ -56,10 +55,11 @@ export const PresetSelector = ({ isDark, selectedId, onSelect }: Props) => {
                             aria-label={preset.label}
                             aria-pressed={selected}
                         >
-                            <Card>
-                                <PresetPreview variant={variant} className={selected ? 'selected' : ''} />
-                                <Label className={selected ? 'selected' : ''}>{preset.label}</Label>
-                            </Card>
+                            <PresetPreview
+                                label={preset.label}
+                                variant={variant}
+                                className={selected ? 'selected' : ''}
+                            />
                         </PresetButton>
                     );
                 })}
@@ -74,29 +74,3 @@ export const PresetSelector = ({ isDark, selectedId, onSelect }: Props) => {
         </>
     );
 };
-
-const Card = styled('div')`
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    width: 180px;
-    height: 100%;
-`;
-
-const Label = styled('div')`
-    flex-shrink: 0;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 500;
-    padding: 2px 0;
-    color: var(--color-fg-primary);
-
-    &.selected {
-        color: var(--color-brand-500);
-        font-weight: 600;
-
-        [data-dark-mode='true'] & {
-            color: var(--color-brand-300);
-        }
-    }
-`;
