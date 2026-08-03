@@ -74,9 +74,6 @@ export const PresetPreview = ({
         [label, studioWidgetBorderColor, studioWidgetBorderWidth]
     );
 
-    console.log(theme._getParamsCss());
-    console.log(theme._getModeParams());
-
     return <Preview className={`${theme._getParamsClassName()} ${className}`}>{svgContent}</Preview>;
 };
 
