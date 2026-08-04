@@ -55,11 +55,7 @@ export const PresetSelector = ({ isDark, selectedId, onSelect }: Props) => {
                             aria-label={preset.label}
                             aria-pressed={selected}
                         >
-                            <PresetPreview
-                                label={preset.label}
-                                variant={variant}
-                                className={selected ? 'selected' : ''}
-                            />
+                            <PresetPreview label={preset.label} variant={variant} />
                         </PresetButton>
                     );
                 })}

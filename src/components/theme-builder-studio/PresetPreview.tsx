@@ -91,9 +91,4 @@ const Preview = styled('div')`
     transition:
         box-shadow 0.2s,
         border-color 0.2s;
-
-    &.selected {
-        border-color: var(--ag-chart-palette-fills-1-color);
-        box-shadow: 0 0 0 2px var(--ag-chart-palette-fills-1-color);
-    }
 `;
