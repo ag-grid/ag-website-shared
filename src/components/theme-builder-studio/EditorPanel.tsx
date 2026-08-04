@@ -13,7 +13,7 @@ import { AdvancedParamSelector } from './AdvancedParamSelector';
 import { type LengthIcon, PARAM_GROUPS, type StudioParamConfig } from './params';
 
 const ADVANCED_SECTION = 'All Parameters';
-const DEFAULT_OPEN_SECTIONS = ['General'];
+const DEFAULT_OPEN_SECTIONS = ['General', 'All Parameters'];
 
 const iconFor = (icon?: LengthIcon): ReactNode => {
     switch (icon) {
