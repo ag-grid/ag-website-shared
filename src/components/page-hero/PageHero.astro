@@ -9,16 +9,22 @@ interface Props {
     eyebrow?: string;
     headline?: string;
     subhead?: string;
+    /**
+     * `brand` paints the section as a solid brand-blue band with light text, matching the
+     * homepage hero. It holds the same colours in dark mode, so the band reads as a
+     * deliberate block of brand colour rather than following the page background.
+     */
+    tone?: 'default' | 'brand';
 }
 
-const { eyebrow, headline, subhead } = Astro.props as Props;
+const { eyebrow, headline, subhead, tone = 'default' } = Astro.props as Props;
 
 const hasEyebrow = eyebrow != null || Astro.slots.has('eyebrow');
 const hasHeadline = headline != null || Astro.slots.has('headline');
 const hasSubhead = subhead != null || Astro.slots.has('subhead');
 ---
 
-<section class={styles.pageHero}>
+<section class:list={[styles.pageHero, tone === 'brand' && styles.pageHeroBrand]}>
     {
         hasEyebrow && (
             <p class={styles.pageHeroEyebrow}>
